@@ -1,0 +1,66 @@
+{
+  "files.autoSave": "afterDelay",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "editor.inlineSuggest.enabled": true,
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.editorAssociations": {
+    "*.iso": "default"
+  },
+  "editor.wordWrap": "on",
+  "editor.tabSize": 2,
+  "editor.fontFamily": "Agave, Consolas, 'Courier New', monospace",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  // "editor.formatOnType": true,
+  "terminal.integrated.fontFamily": "Hack nerd font",
+  "terminal.integrated.fontSize": 12,
+  "workbench.productIconTheme": "fluent-icons",
+  "python.analysis.inlayHints.functionReturnTypes": true,
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  "vim.useCtrlKeys": false,
+  "workbench.colorTheme": "Cobalt2",
+  "editor.minimap.enabled": false,
+  "glassit.alpha": 245,
+  "window.titleBarStyle": "custom",
+  "colorize.include": [
+    "**/*.json",
+    "**/*.css",
+    "**/*.scss",
+    "**/*.sass",
+    "**/*.less",
+    "**/*.styl"
+  ]
+
+  // "vim.overrideCopy": true,
+  // "vim.useSystemClipboard": true,
+
+  // "editor.tokenColorCustomizations": {
+  //   "textMateRules": [
+  //     {
+  //       "scope": ["string.template", "punctuation.definition.string.template"],
+  //       "settings": {
+  //         "foreground": "#A5FF90"
+  //       }
+  //     },
+  //     {
+  //       "scope": "variable",
+  //       "settings": {
+  //         "foreground": "#abc5e3"
+  //       }
+  //     }
+  //   ]
+  // }
+  // "vim.handleKeys": {
+  //   "<C-z>": false,
+  //   "<C-y>": false,
+  //   "<C-c>": false,
+  //   "<C-v>": false,
+  //   "<C-x>": false,
+  //   "<C-f>": false,
+  //   "<C-a>": false,
+  //   "<C-j>": false,
+  //   "<C-0>": false
+  // },
+}

@@ -1,0 +1,55 @@
+{
+  "manifest_version": 2,
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "",
+      "strict_min_version": "60.0"
+    }
+  },
+  "name": "Nier Automata Theme",
+  "description": "Nier Automata inspired theme for Thunderbird",
+  "version": "1.0",
+  "theme": {
+    "images": {
+      "theme_frame": "image_cropped.png"
+    },
+    "colors": {
+      // "button_background_active": "#3a372c",
+      // "button_background_hover": "rgba(58, 55, 44, .8)",
+
+      "frame": "#c8c2ab",
+
+      "tab_background_text": "#3a372c",
+      "tab_text": "#3a372c",
+      "tab_line": "#3a372c",
+      "tab_loading": "#3a372c",
+
+      "bookmark_text": "#3a372c",
+
+      "toolbar_field": "#d0cab3",
+      "toolbar_field_text": "#444",
+      "toolbar_field_highlight": "#3a372c",
+      "toolbar_field_highlight_text": "#d0cab3",
+      "toolbar_field_border": "#999",
+      "toolbar_field_focus": "#d0cab3",
+      "toolbar_field_text_focus": "#605e51",
+      "toolbar_field_border_focus": "#3a372c",
+      "toolbar_top_separator": "#aaa",
+      "toolbar_bottom_separator": "#888",
+      "toolbar_vertical_separator": "#888",
+
+      "sidebar": "#d0cab3",
+      "sidebar_text": "#3a372c",
+      "sidebar_highlight": "rgba(58, 55, 44, .8)",
+      "sidebar_highlight_text": "#d0cab3",
+      "sidebar_border": "#999",
+      "sidebar_highlight_border": "#3a372c",
+
+      "popup": "#d0cab3",
+      "popup_text": "#605e51",
+      "popup_border": "#666",
+      "popup_highlight": "#605e51",
+      "popup_highlight_text": "#d0cab3"
+    }
+  }
+}

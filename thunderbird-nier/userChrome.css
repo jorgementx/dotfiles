@@ -1,0 +1,22 @@
+/* New message button */
+#folderPaneWriteMessage,
+#folderPaneWriteMessage:hover {
+  background-color: #3a372c !important;
+  border-color: #3a372c !important;
+}
+
+[is="tree-view-table-body"] {
+  background-color: #d0cab3 !important;
+}
+
+/* threads pane unread colour table view */
+#threadTree tr[data-properties~="unread"] {
+  color: rgb(235, 89, 89) !important;
+  background-color: #d0cab3 !important;
+}
+
+
+/* threads pane new colour table view
+#threadTree tr[data-properties~="new"] {
+  color: green !important;
+} */
