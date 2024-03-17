@@ -6,7 +6,7 @@
 - Gnome extensions:
   - User themes
 - gnome-shell.css: on progress
-- wallpaper: [suzume](./suzume.jpg)
+- [suzume wallpaper](./suzume.jpg)
 - nvim: on progress (default lazyvim for the moment)
 - vscode theme: cobalt2
-- [Windows keyboard](https://github.com/thomasfaingnaert/win-us-intl-altgr)https://github.com/thomasfaingnaert/win-us-intl-altgr
+- [Windows keyboard](https://github.com/thomasfaingnaert/win-us-intl-altgr)
