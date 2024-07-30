@@ -9,7 +9,7 @@
   - [Desktop clock](https://extensions.gnome.org/extension/5156/desktop-clock/)
   - [Pop Shell](https://github.com/pop-os/shell)
   - [Color Picker](https://extensions.gnome.org/extension/3396/color-picker/)
-  - [clipboard Indicator](https://extensions.gnome.org/extension/779/clipboard-indicator/)
+  - [Clipboard Indicator](https://extensions.gnome.org/extension/779/clipboard-indicator/)
   - [Rounded Window Corners](https://extensions.gnome.org/extension/5237/rounded-window-corners/)
 - Gnome shortcuts (yet to come)
 - nvim: on progress (default lazyvim for the moment)
