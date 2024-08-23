@@ -54,6 +54,10 @@
     "when": "remoteFileDialogVisible"
   },
   {
+    "key": "ctrl+e",
+    "command": "-workbench.action.quickOpen"
+  },
+  {
     "key": "ctrl+o",
     "command": "workbench.action.quickOpen"
   },
