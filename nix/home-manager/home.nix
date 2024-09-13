@@ -1,56 +1,33 @@
 { config, pkgs, ... }:
 
+# let
+   # stablePkgs = import <nixpkgs-stable> {};
+# in
 {
   nixpkgs.config.allowunfree = true;
   nixpkgs.config.allowUnfreePredicate = _: true;
 
-  home = {
+  home = rec {
     username = "jorge";
-    homeDirectory = "/home/jorge";
+    homeDirectory = "/home/${username}";
     stateVersion = "24.05";
-    packages = [
-      pkgs.anki
-      pkgs.btop
-      pkgs.cava
-      pkgs.git
-      pkgs.lazygit
-      pkgs.mpv
-      pkgs.obsidian
-      pkgs.vim
-      pkgs.vscode
-      pkgs.google-chrome
+    packages = with.pkgs; [
+      anki
+      cava
+      obsidian
+      vscode
+      google-chrome
+      kubectl
+      kubectl-node-shell
+      kubernetes-helm
+      pipx
+      peco
+      jq
     ];
     # Home Manager is pretty good at managing dotfiles. The primary way to manage
     # plain files is through 'home.file'.
-    file = {
-      # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-      # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-      # # symlink to the Nix store copy.
-      # ".screenrc".source = dotfiles/screenrc;
+    file = {};
 
-      # # You can also set the file content immediately.
-      # ".gradle/gradle.properties".text = ''
-      #   org.gradle.console=verbose
-      #   org.gradle.daemon.idletimeout=3600000
-      # '';
-    };
-
-    # Home Manager can also manage your environment variables through
-    # 'home.sessionVariables'. These will be explicitly sourced when using a
-    # shell provided by Home Manager. If you don't want to manage your shell
-    # through Home Manager then you have to manually source 'hm-session-vars.sh'
-    # located at either
-    #
-    #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-    #
-    # or
-    #
-    #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
-    #
-    # or
-    #
-    #  /etc/profiles/per-user/jorge/etc/profile.d/hm-session-vars.sh
-    #
     sessionVariables = {
       EDITOR = "vim";
     };
@@ -69,9 +46,187 @@
     };
   };
 
-  # programs.fish = {
-  #   enable = true;
-  # };
+  programs.mpv.enable = true;
+
+  programs.translate-shell = {
+      enable = true;
+      settings = {
+        hl = "en";
+        tl = [
+          "ko"
+        ];
+        verbose = true;
+      };
+  };
+
+  programs.btop = {
+    enable = true;
+    settings = {
+      color_theme = "ayu";
+      theme_background = false;
+      vim_keys = true;
+    };
+  };
+
+  programs.lazygit = {
+    enable = true;
+    settings = {
+      promptToReturnFromSubprocess = false;
+      gui.showIcons = true;
+    };
+  };
+
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
+    vimdiffAlias = true;
+    # plugins = with pkgs.vimPlugins; [
+    # ];
+  };
+
+  programs.k9s = {
+    enable = true;
+    plugin = {
+      plugins = {
+        nodeShell = {
+          shortCut = "s";
+          description = "Shell";
+          scopes = [ "nodes" ];
+          command = "bash";
+          background = false;
+          args = [
+            "-c"
+            "kubectl node-shell $NAME"
+          ];
+        };
+      };
+    };
+    settings = {
+      shellPod = {
+        image = "busybox:1.35.0";
+        namespace = "default";
+        limits = {
+          cpu = "100m";
+          memory = "100Mi";
+        };
+      };
+    };
+    skins = {
+      dracula = let
+          foreground = "#f8f8f2";
+          background = "#282a36";
+          current_line = "#44475a";
+          selection = "#44475a";
+          comment = "#6272a4";
+          cyan = "#8be9fd";
+          green = "#50fa7b";
+          orange = "#ffb86c";
+          pink = "#ff79c6";
+          purple = "#bd93f9";
+          red = "#ff5555";
+          yellow = "#f1fa8c";
+      in {
+        k9s = {
+          body = {
+            fgColor = foreground;
+            bgColor = background;
+            logoColor = purple;
+          };
+          prompt = {
+            fgColor = foreground;
+            bgColor = background;
+            suggestColor = purple;
+          };
+          info = {
+            fgColor = pink;
+            sectionColor = foreground;
+          };
+          dialog = {
+            fgColor = foreground;
+            bgColor = background;
+            buttonFgColor = foreground;
+            buttonBgColor = purple;
+            buttonFocusFgColor = yellow;
+            buttonFocusBgColor = pink;
+            labelFgColor = orange;
+            fieldFgColor = foreground;
+          };
+          frame = {
+            border = {
+              fgColor = selection;
+              focusColor = current_line;
+            };
+            menu = {
+              fgColor = foreground;
+              keyColor = pink;
+              numKeyColor = pink;
+            };
+            crumbs = {
+              fgColor = foreground;
+              bgColor = current_line;
+              activeColor = current_line;
+            };
+            status = {
+              newColor = cyan;
+              modifyColor = purple;
+              addColor = green;
+              errorColor = red;
+              highlightColor = orange;
+              killColor = comment;
+              completedColor = comment;
+            };
+            title = {
+              fgColor = foreground;
+              bgColor = current_line;
+              highlightColor = orange;
+              counterColor = purple;
+              filterColor = pink;
+            };
+          };
+          views = {
+            charts = {
+              bgColor = "default";
+              defaultDialColors = [purple red];
+              defaultChartColors = [purple red];
+            };
+            table = {
+              fgColor = foreground;
+              bgColor = background;
+              header = {
+                fgColor = foreground;
+                bgColor = background;
+                sorterColor = cyan;
+              };
+            };
+            xray = {
+              fgColor = foreground;
+              bgColor = background;
+              cursorColor = current_line;
+              graphicColor = purple;
+              showIcons = false;
+            };
+            yaml = {
+              keyColor = pink;
+              colonColor = purple;
+              valueColor = foreground;
+            };
+            logs = {
+              fgColor = foreground;
+              bgColor = background;
+              indicator = {
+                fgColor = foreground;
+                bgColor = purple;
+                toggleOnColor = green;
+                toggleOffColor = cyan;
+              };
+            };
+          };
+        };
+      };
+    };
+  };
 
   nix.gc = {
     automatic = true;
