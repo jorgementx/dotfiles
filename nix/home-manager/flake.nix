@@ -1,9 +1,10 @@
 {
-  description = "Home Manager configuration of Jorge";
+  description = "Home Manager configuration of jorge-pb";
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -11,23 +12,43 @@
     nixvim.url = "github:dc-tec/nixvim";
   };
 
-  outputs = { nixpkgs, home-manager, nixvim, ... }:
-    let
+  outputs = {
+    nixpkgs,
+    nixpkgs-stable,
+    home-manager,
+    nixvim,
+    ... 
+  }: let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
     in {
-      homeConfigurations."jorge" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
+      homeConfigurations = {
+        "jorge-pb@jorgepb-hp" = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
 
-        # Specify your home configuration modules here, for example,
-        # the path to your home.nix.
-        modules = [ ./home.nix ];
+          extraSpecialArgs = {
+            inherit nixvim;
+            pkgs-stable = import nixpkgs-stable {
+              inherit system;
+            };
+          };
 
-        # Optionally use extraSpecialArgs
-        # to pass through arguments to home.nix
-        extraSpecialArgs = {
-          inherit nixvim;
+          modules = [ ./home/work.nix ];
         };
+
+        "jorge" = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+
+          modules = [ ./home/personal.nix ];
+
+          extraSpecialArgs = {
+            inherit nixvim;
+            pkgs-stable = import nixpkgs-stable {
+              inherit system;
+              config.allowUnfree = true;
+            };
+          };
+      };
       };
     };
 }

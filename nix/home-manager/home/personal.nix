@@ -1,8 +1,4 @@
 { config, pkgs, ... }:
-
-# let
-   # stablePkgs = import <nixpkgs-stable> {};
-# in
 {
   nixpkgs.config.allowunfree = true;
   nixpkgs.config.allowUnfreePredicate = _: true;
@@ -13,7 +9,7 @@
     inherit username;
     homeDirectory = "/home/${username}";
     stateVersion = "24.05";
-    packages = with.pkgs; [
+    packages = with pkgs; [
       anki
       obsidian
       vscode
@@ -26,8 +22,7 @@
       jq
       jqp
     ];
-    # Home Manager is pretty good at managing dotfiles. The primary way to manage
-    # plain files is through 'home.file'.
+
     file = {};
     sessionVariables = {
       VISUAL = "code";
