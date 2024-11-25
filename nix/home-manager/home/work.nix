@@ -14,6 +14,7 @@
       kubectl
       kubectl-node-shell
       kubernetes-helm
+      docker-client
       dive
       pipx
       peco

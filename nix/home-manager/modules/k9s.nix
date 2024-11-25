@@ -11,7 +11,7 @@
           background = false;
           args = [
             "-c"
-            "kubectl node-shell $NAME"
+            "kubectl-node_shell $NAME"
           ];
         };
       };
