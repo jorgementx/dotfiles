@@ -40,6 +40,7 @@
     userEmail = "jordims2000@gmail.com";
     extraConfig = {
       pull.rebase = false;
+      init.defaultBranch = "main";
     };
   };
 
