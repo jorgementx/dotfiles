@@ -14,6 +14,7 @@
       kubectl
       kubectl-node-shell
       kubernetes-helm
+      minikube
       docker-client
       dive
       pipx
@@ -22,7 +23,9 @@
       jqp
       python311
       uv
-      inputs.nixvim.packages."${pkgs.system}".default
+      ollama-rocm
+      fluxcd
+      glab
     ];
     file = {};
     sessionVariables = {
@@ -56,6 +59,7 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  programs.go.enable = true;
 
   # programs.direnv = {
   #     enable = true;
