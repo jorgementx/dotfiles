@@ -26,6 +26,7 @@
       ollama-rocm
       fluxcd
       glab
+      commitizen
     ];
     file = {};
     sessionVariables = {
