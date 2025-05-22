@@ -8,5 +8,17 @@ customCommands:
     command: "cz commit"
     description: "commit with commitizen"
     context: "files"
-    loadingText: "opening commitizen commit tool"
+    loadingText: "Opening commitizen commit tool"
+    subprocess: true
+  - key: "B"
+    command: "cz bump"
+    description: "Bump version with commitizen"
+    context: "files"
+    loadingText: "Opening commitizen"
+    subprocess: true
+  - key: "I"
+    command: "cz init"
+    description: "Initialize commitizen"
+    context: "files"
+    loadingText: "Opening commitizen"
     subprocess: true
