@@ -6,9 +6,9 @@ services:
 customCommands:
   - key: "C"
     command: "cz commit"
-    description: "commit with commitizen"
+    description: "Commit with commitizen"
     context: "files"
-    loadingText: "Opening commitizen commit tool"
+    loadingText: "Opening commitizen"
     subprocess: true
   - key: "B"
     command: "cz bump"
