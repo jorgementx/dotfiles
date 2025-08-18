@@ -15,6 +15,7 @@
       kubectl-node-shell
       kubernetes-helm
       minikube
+      velero
       docker-client
       dive
       pipx
@@ -24,6 +25,7 @@
       uv
       glab
       commitizen
+      oha
     ];
     file = {};
     sessionVariables = {

@@ -17,6 +17,9 @@
       };
     };
     settings = {
+      logger = {
+        tail = 5000;
+      };
       shellPod = {
         image = "busybox:1.35.0";
         namespace = "default";

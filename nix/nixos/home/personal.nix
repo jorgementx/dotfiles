@@ -18,10 +18,10 @@
       peco
       jq
       jqp
-      python311
       uv
       fzf
       go
+      commitizen
     ];
 
     file = {};
