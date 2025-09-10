@@ -26,6 +26,7 @@
       glab
       commitizen
       oha
+      k3d
     ];
     file = {};
     sessionVariables = {
@@ -84,6 +85,6 @@
   nix.gc = {
     automatic = true;
     options = "-d";
-    frequency = "weekly";
+    dates = "weekly";
   };
 }

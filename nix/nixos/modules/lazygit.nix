@@ -14,7 +14,7 @@
           description = "Commit with commitizen";
           context = "files";
           loadingText = "Opening commitizen";
-          subprocess = true;
+          output = "terminal";
         }
         {
           key = "B";
@@ -22,7 +22,7 @@
           description = "Bump version with commitizen";
           context = "files";
           loadingText = "Opening commitizen";
-          subprocess = true;
+          output = "terminal";
         }
         {
           key = "I";
@@ -30,7 +30,7 @@
           description = "Initialize commitizen";
           context = "files";
           loadingText = "Opening commitizen";
-          subprocess = true;
+          output = "terminal";
         }
       ];
     };
