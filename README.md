@@ -19,60 +19,110 @@
 ## Project structure:
 
 ```
-.
-├── AntiMicroX
-│   └── anki.gamecontroller.amgp
-├── fish
-│   ├── fish_plugins
-│   └── fish_variables
-├── gtk-3.0
-│   └── gtk.css
-├── hyprland
-│   ├── hypr
-│   │   └── custom
-│   │       ├── env.conf
-│   │       ├── execs.conf
-│   │       ├── general.conf
-│   │       ├── keybinds.conf
-│   │       └── rules.conf
-│   └── README.md
-├── k9s
-│   ├── config.yaml
-│   ├── plugins.yaml
-│   └── skins
-│       └── dracula.yaml
-├── lazygit
-│   └── config.yml
-├── lazyvim
-│   └── keymaps.lua
-├── mpv
-│   ├── input.conf
-│   ├── mpv.conf
-│   ├── script-opts
-│   │   ├── sub_pause.conf
-│   │   └── subs2srs.conf
-│   └── scripts
-│       └── autosub.lua
-├── nix
-│   ├── home-manager
-│   │   ├── flake.lock
-│   │   ├── flake.nix
-│   │   └── home.nix
-│   └── nix.conf
-├── obsidian
-├── oh-my-zsh
-├── README.md
-├── thunderbird-nier
-│   ├── image_cropped.png
-│   ├── image_full.png
-│   ├── manifest.json
-│   └── userChrome.css
-├── tmux
-├── vscode
-│   ├── keybindings.json
-│   └── settings.json
-└── wallpapers
-    ├── howsmovingcastle.jpg
-    ├── kiminonawa.jpg
-    └── suzume.jpg
+│   README.md
+│
+├───AntiMicroX
+│       anki.gamecontroller.amgp
+│
+├───fish
+│       fish_plugins
+│       fish_variables
+│
+├───ghostty
+│       config
+│
+├───gtk-3.0
+│       gtk.css
+│
+├───hyprland
+│   │   README.md
+│   │
+│   └───hypr
+│       └───custom
+│               env.conf
+│               execs.conf
+│               general.conf
+│               keybinds.conf
+│               rules.conf
+│
+├───k9s
+│   │   config.yaml
+│   │   plugins.yaml
+│   │
+│   └───skins
+│           dracula.yaml
+│
+├───komorebi
+│       komorebi.ahk
+│       komorebi.json
+│
+├───lazygit
+│       config.yml
+│
+├───lazyvim
+│       keymaps.lua
+│
+├───mpv
+│   │   input.conf
+│   │   mpv.conf
+│   │
+│   ├───script-opts
+│   │       subs2srs.conf
+│   │       sub_pause.conf
+│   │
+│   └───scripts
+│           autosub.lua
+│
+├───nix
+│   │   nix.conf
+│   │
+│   └───nixos
+│       │   configuration.nix
+│       │   flake.lock
+│       │   flake.nix
+│       │   home.nix
+│       │
+│       ├───home
+│       │       default.nix
+│       │       personal.nix
+│       │       work.nix
+│       │
+│       └───modules
+│               atuin.nix
+│               btop.nix
+│               k9s.nix
+│               lazygit.nix
+│               mpv.nix
+│               neovim.nix
+│               translate.nix
+│               zsh.nix
+│
+├───obsidian
+│       .gitkeep
+│
+├───oh-my-zsh
+│       .profile
+│       .zshrc
+│
+├───PowerShell
+│       Microsoft.PowerShell_profile.ps1
+│
+├───thunderbird-nier
+│       image_cropped.png
+│       image_full.png
+│       manifest.json
+│       userChrome.css
+│
+├───tmux
+│       .gitkeep
+│       .tmux.conf
+│
+├───vscode
+│       keybindings.json
+│       settings.json
+│
+└───wallpapers
+        howsmovingcastle.jpg
+        kiminonawa.jpg
+        suzume.jpg
 ```
