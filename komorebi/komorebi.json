@@ -32,5 +32,12 @@
     }
   },
   "ignore_rules": [
+  ],
+  "floating_applications": [
+    {
+      "kind": "Title",
+      "id": "Picture in picture",
+      "matching_strategy": "Equals"
+    }
   ]
 }
