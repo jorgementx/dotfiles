@@ -12,11 +12,18 @@
   - [Clipboard Indicator](https://extensions.gnome.org/extension/779/clipboard-indicator/)
   - [Rounded Window Corners](https://extensions.gnome.org/extension/5237/rounded-window-corners/)
 - Gnome shortcuts (yet to come)
-- nvim: on progress (default lazyvim for the moment)
+- nvim: default lazyvim for the moment
 - vscode theme: cobalt2
 - [Windows keyboard layout](https://github.com/thomasfaingnaert/win-us-intl-altgr)
 
 ## Project structure:
+
+> [!NOTE]
+> Marked with a `*` the ones that I actually actively use.
+
+> [!TIP]
+> What I do to keep this configurations always synced with this repo is creating a symbolic link from this repo's file to the proper directory in my system.
+> Linux example: `cd ~/.config/ghostty && ln -s ~/Projects/dotfiles/ghostty/config .`
 
 ```
 │   README.md
@@ -28,7 +35,7 @@
 │       fish_plugins
 │       fish_variables
 │
-├───ghostty
+├───ghostty *
 │       config
 │
 ├───gtk-3.0
@@ -45,24 +52,24 @@
 │               keybinds.conf
 │               rules.conf
 │
-├───k9s
+├───k9s *
 │   │   config.yaml
 │   │   plugins.yaml
 │   │
 │   └───skins
 │           dracula.yaml
 │
-├───komorebi
+├───komorebi *
 │       komorebi.ahk
 │       komorebi.json
 │
-├───lazygit
+├───lazygit *
 │       config.yml
 │
 ├───lazyvim
 │       keymaps.lua
 │
-├───mpv
+├───mpv *
 │   │   input.conf
 │   │   mpv.conf
 │   │
@@ -73,7 +80,7 @@
 │   └───scripts
 │           autosub.lua
 │
-├───nix
+├───nix *
 │   │   nix.conf
 │   │
 │   └───nixos
@@ -101,10 +108,10 @@
 │       .gitkeep
 │
 ├───oh-my-zsh
-│       .profile
+│       .profile *
 │       .zshrc
 │
-├───PowerShell
+├───PowerShell *
 │       Microsoft.PowerShell_profile.ps1
 │
 ├───thunderbird-nier
@@ -117,7 +124,7 @@
 │       .gitkeep
 │       .tmux.conf
 │
-├───vscode
+├───vscode *
 │       keybindings.json
 │       settings.json
 │
