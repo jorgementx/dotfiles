@@ -43,3 +43,8 @@
 # resize-overlay-duration = 4s 200ms
 
 window-decoration = none
+background-opacity = 0.9
+background-blur-radius = 20
+
+keybind = performable:ctrl+c=copy_to_clipboard
+keybind = ctrl+v=paste_from_clipboard
