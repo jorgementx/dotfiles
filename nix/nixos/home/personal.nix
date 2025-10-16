@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, ... }@inputs:
 {
   nixpkgs.config.allowunfree = true;
   nixpkgs.config.allowUnfreePredicate = _: true;
@@ -22,6 +22,9 @@
       fzf
       go
       commitizen
+      k3d
+      gh
+      inputs.nixvim.packages.${system}.default
     ];
 
     file = {};

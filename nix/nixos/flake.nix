@@ -1,5 +1,5 @@
 {
-  description = "Home Manager configuration of jorge-pb";
+  description = "NixOS & Home Manager configuration";
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
@@ -35,7 +35,7 @@
 
           nixos-wsl.nixosModules.wsl
 
-          home-manager.nixosModules.home-manager
+          home-manager.nixosModules.home-manager  # Home manager configuration as NixOS module
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
@@ -51,7 +51,7 @@
           }
         ];
       };
-      homeConfigurations = {
+      homeConfigurations = {  # Standalone home manager configuration
         "jorge-pb@jorgepb-hp" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
 
