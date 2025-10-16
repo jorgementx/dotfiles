@@ -1,7 +1,7 @@
 { config, pkgs, ...}: {
     programs.zsh = {
         enable = true;
-        initExtra = "source ~/.profile";
+        initContent = "source ~/.profile";
         syntaxHighlighting.enable = true;
         autosuggestion.enable = true;
 

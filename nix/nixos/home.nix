@@ -1,3 +1,4 @@
+# This file is not used anymore. Check ./home/work.nix or ./home/personal.nix
 
 { config, pkgs, pkgs-stable, ... }@inputs:
 {
@@ -65,6 +66,6 @@
   nix.gc = {
     automatic = true;
     options = "-d";
-    frequency = "weekly";
+    dates = "weekly";
   };
 }

@@ -1,22 +1,23 @@
 { config, pkgs, ...}: {
   programs.k9s = {
     enable = true;
-    plugin = {
-      plugins = {
-        nodeShell = {
-          shortCut = "s";
-          description = "Shell";
-          scopes = [ "nodes" ];
-          command = "bash";
-          background = false;
-          args = [
-            "-c"
-            "kubectl-node_shell $NAME"
-          ];
-        };
+    plugins = {
+      nodeShell = {
+        shortCut = "s";
+        description = "Shell";
+        scopes = [ "nodes" ];
+        command = "bash";
+        background = false;
+        args = [
+          "-c"
+          "kubectl-node_shell $NAME --context $CONTEXT"
+        ];
       };
     };
     settings = {
+      logger = {
+        tail = 5000;
+      };
       shellPod = {
         image = "busybox:1.35.0";
         namespace = "default";

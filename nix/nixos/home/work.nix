@@ -15,17 +15,18 @@
       kubectl-node-shell
       kubernetes-helm
       minikube
+      velero
       docker-client
       dive
       pipx
       peco
       jq
       jqp
-      python311
       uv
-      ollama-rocm
-      fluxcd
       glab
+      commitizen
+      oha
+      k3d
     ];
     file = {};
     sessionVariables = {
@@ -59,6 +60,20 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  programs.git = {
+    enable = true;
+    userName = "Jorge Mentxaka";
+    userEmail = "jmentxaka@purpleblob.net";
+    extraConfig = {
+      pull.rebase = false;
+      pull.merge = true;
+      init.defaultBranch = "main";
+      submodule.recurse = true;
+      core.autocrlf = "input";
+      core.editor = "vim";
+    };
+  };
+
   programs.go.enable = true;
 
   # programs.direnv = {
@@ -70,6 +85,6 @@
   nix.gc = {
     automatic = true;
     options = "-d";
-    frequency = "weekly";
+    dates = "weekly";
   };
 }
