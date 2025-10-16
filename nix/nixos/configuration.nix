@@ -37,6 +37,8 @@
     pkgs.neovim
   ];
 
+  networking.nameservers = [ "8.8.8.8" ];
+
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
