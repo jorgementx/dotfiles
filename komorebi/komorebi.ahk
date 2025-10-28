@@ -75,4 +75,5 @@ Komorebic(cmd) {
 #w::Run "c:\Program Files\Google\Chrome\Application\chrome.exe"
 #a::Run "C:\Users\jordi\AppData\Local\Programs\Anki\anki.exe"
 #o::Run "C:\Users\jordi\AppData\Local\Obsidian\Obsidian.exe"
+#c::Run "C:\Users\jordi\AppData\Local\Programs\Microsoft VS Code\Code.exe"
 #e::Run "explorer.exe"
