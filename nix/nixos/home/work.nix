@@ -14,7 +14,6 @@
       kubectl
       kubectl-node-shell
       kubernetes-helm
-      minikube
       velero
       docker-client
       dive
@@ -27,6 +26,8 @@
       commitizen
       oha
       k3d
+      fzf
+      devenv
     ];
     file = {};
     sessionVariables = {
@@ -62,9 +63,9 @@
 
   programs.git = {
     enable = true;
-    userName = "Jorge Mentxaka";
-    userEmail = "jmentxaka@purpleblob.net";
-    extraConfig = {
+    settings = {
+      user.name = "Jorge Mentxaka";
+      user.email = "jmentxaka@purpleblob.net";
       pull.rebase = false;
       pull.merge = true;
       init.defaultBranch = "main";
@@ -76,11 +77,17 @@
 
   programs.go.enable = true;
 
-  # programs.direnv = {
-  #     enable = true;
-  #     enableZshIntegration = true;
-  #     nix-direnv.enable = true;
-  # };
+  programs.direnv = {
+      enable = true;
+      enableZshIntegration = true;
+      nix-direnv.enable = true;
+  };
+
+  programs.vicinae = {
+      enable = true;
+      systemd.autoStart = true;
+      systemd.enable = true;
+  };
 
   nix.gc = {
     automatic = true;
