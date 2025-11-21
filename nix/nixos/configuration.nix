@@ -8,7 +8,12 @@
   lib,
   pkgs,
   ...
-} @ inputs: {
+}@inputs:
+{
+  nix.settings.trusted-users = [
+    "root"
+    "jorge"
+  ];
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
@@ -16,11 +21,12 @@
   wsl.enable = true;
   wsl.defaultUser = "jorge";
   wsl.startMenuLaunchers = true;
+  wsl.wslConf.network.generateResolvConf = false;
 
   virtualisation.docker.enable = true;
   virtualisation.podman.enable = false;
   programs.zsh.enable = true;
-  users.users.jorge.extraGroups = ["docker"];
+  users.users.jorge.extraGroups = [ "docker" ];
   users.users.jorge.shell = pkgs.zsh;
 
   programs.nix-ld = {
@@ -37,8 +43,10 @@
     pkgs.neovim
   ];
 
-  networking.nameservers = [ "8.8.8.8" ];
-
+  networking.nameservers = [
+    "1.1.1.1"
+    "8.8.8.8"
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

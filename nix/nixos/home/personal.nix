@@ -26,6 +26,7 @@
         commitizen
         k3d
         gh
+        devenv
         inputs.nixvim.packages.${system}.default
       ];
 
