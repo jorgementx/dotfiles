@@ -28,6 +28,8 @@
       k3d
       fzf
       devenv
+      sops
+      age
     ];
     file = {};
     sessionVariables = {
@@ -68,6 +70,7 @@
       user.email = "jmentxaka@purpleblob.net";
       pull.rebase = false;
       pull.merge = true;
+      push.useForceIfIncludes = true;
       init.defaultBranch = "main";
       submodule.recurse = true;
       core.autocrlf = "input";
