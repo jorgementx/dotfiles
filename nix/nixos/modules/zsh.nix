@@ -1,7 +1,7 @@
 { config, pkgs, ...}: {
     programs.zsh = {
         enable = true;
-        initContent = "source ~/.profile";
+        initContent = "source ~/.dirty_profile";
         syntaxHighlighting.enable = true;
         autosuggestion.enable = true;
 
