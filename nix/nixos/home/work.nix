@@ -33,7 +33,7 @@
     ];
     file = {};
     sessionVariables = {
-      VISUAL = "code";
+      #VISUAL = "code";
       EDITOR = "nvim";
       CAPACITOR_ANDROID_STUDIO_PATH = "/opt/android-studio/bin/studio.sh";
     };
