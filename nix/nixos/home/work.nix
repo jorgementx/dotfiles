@@ -14,6 +14,7 @@
       kubectl
       kubectl-node-shell
       kubernetes-helm
+      kubie
       velero
       docker-client
       dive
@@ -46,6 +47,7 @@
       lg = "lazygit";
       k = "kubectl";
       quote = "curl -s http://api.quotable.io/random | jq -r \'\"\\(.content)\\n- \\(.author)\"\'";
+      konfig = "kubie ctx";
     };
   };
 
