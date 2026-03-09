@@ -5,15 +5,42 @@
         syntaxHighlighting.enable = true;
         autosuggestion.enable = true;
 
-        oh-my-zsh = {
-            enable = true;
-            plugins = [
-                "vi-mode"
-                "zsh-interactive-cd"
-                "sudo"
-            ];
-            # theme = "agnoster";
+        localVariables = {
+          # KEYTIMEOUT = 1; # si se pone esto se evita el delay al salir del modo INSERT pero el plugin de sudo no va a funcionar bien
         };
+
+        plugins = [
+          {
+            name = "zsh-interactive-cd";
+            file = "zsh-interactive-cd.plugin.zsh";
+            src = pkgs.fetchFromGitHub {
+              owner = "mrjohannchang";
+              repo = "zsh-interactive-cd";
+              rev = "master";
+              sha256 = "sha256-j23Ew18o7i/7dLlrTu0/54+6mbY8srsptfrDP/9BI/Q=";
+            };
+          }
+          {
+            name = "sudo";
+            file = "plugins/sudo/sudo.plugin.zsh";
+            src = pkgs.fetchFromGitHub {
+              owner = "ohmyzsh";
+              repo = "ohmyzsh";
+              rev = "master";
+              sha256 = "sha256-k3frBcklYRt7ZjylX2bk6WWz3kAvWKVBJd2UpxyDWUE=";
+            };
+          }
+          {
+            name = "vi-mode";
+            file = "plugins/vi-mode/vi-mode.plugin.zsh";
+            src = pkgs.fetchFromGitHub {
+              owner = "ohmyzsh";
+              repo = "ohmyzsh";
+              rev = "master";
+              sha256 = "sha256-k3frBcklYRt7ZjylX2bk6WWz3kAvWKVBJd2UpxyDWUE=";
+            };
+          }
+        ];
     };
 
     programs.zoxide.enable = true;

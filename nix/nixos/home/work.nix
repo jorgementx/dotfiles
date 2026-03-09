@@ -1,8 +1,8 @@
 
 { config, pkgs, pkgs-stable, ... }@inputs:
 {
-  # nixpkgs.config.allowunfree = true;
-  # nixpkgs.config.allowUnfreePredicate = _: true;
+  nixpkgs.config.allowunfree = true;
+  nixpkgs.config.allowUnfreePredicate = _: true;
 
   home = let
     username = "jorge-pb";
@@ -11,26 +11,31 @@
     homeDirectory = "/home/${username}";
     stateVersion = "24.05";
     packages = with pkgs; [
+      # docker and kubernetes
       kubectl
       kubectl-node-shell
       kubernetes-helm
       kubie
       velero
       docker-client
+      k3d
       dive
+      # dev
+      devenv
       pipx
+      uv
+      # git
+      glab
+      commitizen
+      # utils
       peco
       jq
       jqp
-      uv
-      glab
-      commitizen
       oha
-      k3d
       fzf
-      devenv
       sops
       age
+      burpsuite
     ];
     file = {};
     sessionVariables = {
