@@ -1,9 +1,20 @@
 { config, pkgs, ...}: {
     programs.zsh = {
         enable = true;
-        initContent = "source ~/.dirty_profile";
+        initContent = ''
+        # Make some behaviours similar to OMZ defaults
+        zmodload -i zsh/complist
+        zstyle ':completion:*' menu select
+        zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]-_}={[:upper:][:lower:]_-}' 'r:|=*' 'l:|=* r:|=*'
+        zstyle ':completion:*' use-cache yes
+        zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/zcompcache"
+
+        # Run file for impure configurations
+        source ~/.dirty_profile
+        '';
         syntaxHighlighting.enable = true;
         autosuggestion.enable = true;
+        autocd = true;
 
         localVariables = {
           # KEYTIMEOUT = 1; # si se pone esto se evita el delay al salir del modo INSERT pero el plugin de sudo no va a funcionar bien

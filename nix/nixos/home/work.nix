@@ -93,11 +93,11 @@
       nix-direnv.enable = true;
   };
 
-  programs.vicinae = {
-      enable = true;
-      systemd.autoStart = true;
-      systemd.enable = true;
-  };
+  # programs.vicinae = {
+  #     enable = true;
+  #     systemd.autoStart = true;
+  #     systemd.enable = true;
+  # };
 
   nix.gc = {
     automatic = true;
