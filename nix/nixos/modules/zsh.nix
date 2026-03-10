@@ -9,6 +9,17 @@
         zstyle ':completion:*' use-cache yes
         zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/zcompcache"
 
+        # Cargar widgets de búsqueda inteligente
+        autoload -U up-line-or-beginning-search
+        autoload -U down-line-or-beginning-search
+        zle -N up-line-or-beginning-search
+        zle -N down-line-or-beginning-search
+
+        # Vincular teclas usando tus códigos específicos
+        bindkey "^[OA" up-line-or-beginning-search
+        bindkey "^[OB" down-line-or-beginning-search
+
+
         # Run file for impure configurations
         source ~/.dirty_profile
         '';
@@ -19,6 +30,8 @@
         localVariables = {
           # KEYTIMEOUT = 1; # si se pone esto se evita el delay al salir del modo INSERT pero el plugin de sudo no va a funcionar bien
         };
+
+        # oh-my-zsh.enable = true;
 
         plugins = [
           {
