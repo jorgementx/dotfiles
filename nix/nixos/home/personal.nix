@@ -1,7 +1,7 @@
 { config, pkgs, ... }@inputs:
 {
-  nixpkgs.config.allowunfree = true;
-  nixpkgs.config.allowUnfreePredicate = _: true;
+  # nixpkgs.config.allowunfree = true;
+  # nixpkgs.config.allowUnfreePredicate = _: true;
 
   home =
     let
@@ -27,6 +27,7 @@
         k3d
         gh
         devenv
+        plocate
         inputs.nixvim.packages.${system}.default
       ];
 
@@ -63,9 +64,9 @@
 
   programs.git = {
     enable = true;
-    userName = "jorgementx";
-    userEmail = "jordims2000@gmail.com";
-    extraConfig = {
+    settings = {
+      user.name = "jorgementx";
+      user.email = "jordims2000@gmail.com";
       pull.rebase = false;
       init.defaultBranch = "main";
       submodule.recurse = true;
@@ -81,6 +82,6 @@
   nix.gc = {
     automatic = true;
     options = "-d";
-    frequency = "weekly";
+    dates = "weekly";
   };
 }
