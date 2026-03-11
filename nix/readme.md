@@ -1,11 +1,28 @@
 ## Configure files in proper routes:
 
+### Single command system configuration
+
+> `git` might be needed
+
+```bash
+# For nixos
+sudo nixos-rebuild switch --flake "github:jorgementx/dotfiles?dir=nix/nixos"
+
+# For standalone home-manager installation
+home-manager switch --flake "github:jorgementx/dotfiles?dir=nix/nixos"
+```
+
+
+### Moving configuration files into place
+
+> In case of local repo and assuming the repo lives in `~/Projects/`
+
 ```bash
 cd /etc/nix && sudo ln -s ~/Projects/dotfiles/nix/nix.conf .
 cd ~/.config && ln -s ~/Projects/dotfiles/nix/nixos .
 ```
 
-### Useful commands
+### Other useful commands
 
 #### Generations
 ```bash

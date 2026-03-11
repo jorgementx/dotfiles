@@ -1,252 +1,263 @@
-{ config, pkgs, ... }:
-{
-  programs.zsh = {
-    enable = true;
-    initContent = "source ~/.dirty_profile";
-    syntaxHighlighting.enable = true;
-    autosuggestion.enable = true;
+{ config, pkgs, ...}: {
+    programs.zsh = {
+        enable = true;
+        initContent = ''
+        # Make some behaviours similar to OMZ defaults
+        zmodload -i zsh/complist
+        zstyle ':completion:*' menu select
+        zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]-_}={[:upper:][:lower:]_-}' 'r:|=*' 'l:|=* r:|=*'
+        zstyle ':completion:*' use-cache yes
+        zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/zcompcache"
 
-    plugins = [
-      {
-        name = "vi-mode";
-        src = pkgs.zsh-vi-mode;
-        file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
-      }
-      {
-        name = "zsh-interactive-cd";
-        file = "zsh-interactive-cd.plugin.zsh";
-        src = pkgs.fetchFromGitHub {
-          owner = "mrjohannchang";
-          repo = "zsh-interactive-cd";
-          rev = "master";
-          sha256 = "sha256-j23Ew18o7i/7dLlrTu0/54+6mbY8srsptfrDP/9BI/Q=";
+        # Cargar widgets de búsqueda inteligente
+        autoload -U up-line-or-beginning-search
+        autoload -U down-line-or-beginning-search
+        zle -N up-line-or-beginning-search
+        zle -N down-line-or-beginning-search
+
+        # Vincular teclas usando tus códigos específicos
+        bindkey "^[OA" up-line-or-beginning-search
+        bindkey "^[OB" down-line-or-beginning-search
+
+
+        # Run file for impure configurations
+        source ~/.dirty_profile
+        '';
+        syntaxHighlighting.enable = true;
+        autosuggestion.enable = true;
+        autocd = true;
+
+        localVariables = {
+          # KEYTIMEOUT = 1; # si se pone esto se evita el delay al salir del modo INSERT pero el plugin de sudo no va a funcionar bien
         };
-      }
-      {
-        # i don't really like this plugin
-        name = "enhancd";
-        file = "init.sh";
-        src = pkgs.fetchFromGitHub {
-          owner = "b4b4r07";
-          repo = "enhancd";
-          rev = "v2.5.1";
-          sha256 = "sha256-kaintLXSfLH7zdLtcoZfVNobCJCap0S/Ldq85wd3krI=";
+
+        # oh-my-zsh.enable = true;
+
+        plugins = [
+          {
+            name = "zsh-interactive-cd";
+            file = "zsh-interactive-cd.plugin.zsh";
+            src = pkgs.fetchFromGitHub {
+              owner = "mrjohannchang";
+              repo = "zsh-interactive-cd";
+              rev = "master";
+              sha256 = "sha256-j23Ew18o7i/7dLlrTu0/54+6mbY8srsptfrDP/9BI/Q=";
+            };
+          }
+          {
+            name = "sudo";
+            file = "plugins/sudo/sudo.plugin.zsh";
+            src = pkgs.fetchFromGitHub {
+              owner = "ohmyzsh";
+              repo = "ohmyzsh";
+              rev = "master";
+              sha256 = "sha256-k3frBcklYRt7ZjylX2bk6WWz3kAvWKVBJd2UpxyDWUE=";
+            };
+          }
+          {
+            name = "vi-mode";
+            file = "plugins/vi-mode/vi-mode.plugin.zsh";
+            src = pkgs.fetchFromGitHub {
+              owner = "ohmyzsh";
+              repo = "ohmyzsh";
+              rev = "master";
+              sha256 = "sha256-k3frBcklYRt7ZjylX2bk6WWz3kAvWKVBJd2UpxyDWUE=";
+            };
+          }
+        ];
+    };
+
+    programs.zoxide.enable = true;
+
+    programs.starship.enable = true;
+    programs.starship.settings = {
+        format = pkgs.lib.concatStrings [
+            "[](color_orange)"
+            "$os"
+            "$username"
+            "[](bg:color_yellow fg:color_orange)"
+            "$directory"
+            "[](fg:color_yellow bg:color_aqua)"
+            "$git_branch"
+            "$git_status"
+            "[](fg:color_aqua bg:color_blue)"
+            "$c"
+            "$rust"
+            "$golang"
+            "$nodejs"
+            "$php"
+            "$java"
+            "$kotlin"
+            "$haskell"
+            "$python"
+            "[](fg:color_blue bg:color_bg3)"
+            "$docker_context"
+            "$conda"
+            "[](fg:color_bg3 bg:color_bg1)"
+            "$time"
+            "[ ](fg:color_bg1)"
+            "$line_break$character"
+        ];
+        palette = "gruvbox_dark";
+        palettes.gruvbox_dark = {
+            color_fg0 = "#fbf1c7";
+            color_bg1 = "#3c3836";
+            color_bg3 = "#665c54";
+            color_blue = "#458588";
+            color_aqua = "#689d6a";
+            color_green = "#98971a";
+            color_orange = "#d65d0e";
+            color_purple = "#b16286";
+            color_red = "#cc241d";
+            color_yellow = "#d79921";
         };
-      }
-      # {  # sudo plugin is disabled because it doesn't work together with the zsh-vi-mode plugin (it does work with the normal vi-mode though)
-      #   name = "sudo";
-      #   file = "plugins/sudo/sudo.plugin.zsh";
-      #   src = pkgs.fetchFromGitHub {
-      #     owner = "ohmyzsh";
-      #     repo = "ohmyzsh";
-      #     rev = "master";
-      #     sha256 = "sha256-k3frBcklYRt7ZjylX2bk6WWz3kAvWKVBJd2UpxyDWUE=";
-      #   };
-      # }
-    ];
 
-    # oh-my-zsh = {
-    #   enable = true;
-    #   plugins = [
-    #     "vi-mode"
-    #     "zsh-interactive-cd"
-    #     "sudo"
-    #   ];
-    #   # theme = "agnoster";
-    # };
-  };
+        os = {
+            disabled = false;
+            style = "bg:color_orange fg:color_fg0";
+        };
 
-  programs.zoxide.enable = true;
+        os.symbols = {
+            Windows = "󰍲";
+            Ubuntu = "󰕈";
+            SUSE = "";
+            Raspbian = "󰐿";
+            Mint = "󰣭";
+            Macos = "󰀵";
+            Manjaro = "";
+            Linux = "󰌽";
+            Gentoo = "󰣨";
+            Fedora = "󰣛";
+            Alpine = "";
+            Amazon = "";
+            Android = "";
+            Arch = "󰣇";
+            Artix = "󰣇";
+            EndeavourOS = "";
+            CentOS = "";
+            Debian = "󰣚";
+            Redhat = "󱄛";
+            RedHatEnterprise = "󱄛";
+            Pop = "";
+        };
 
-  programs.starship.enable = true;
-  programs.starship.settings = {
-    format = pkgs.lib.concatStrings [
-      "[](color_orange)"
-      "$os"
-      "$username"
-      "[](bg:color_yellow fg:color_orange)"
-      "$directory"
-      "[](fg:color_yellow bg:color_aqua)"
-      "$git_branch"
-      "$git_status"
-      "[](fg:color_aqua bg:color_blue)"
-      "$c"
-      "$rust"
-      "$golang"
-      "$nodejs"
-      "$php"
-      "$java"
-      "$kotlin"
-      "$haskell"
-      "$python"
-      "[](fg:color_blue bg:color_bg3)"
-      "$docker_context"
-      "$conda"
-      "[](fg:color_bg3 bg:color_bg1)"
-      "$time"
-      "[ ](fg:color_bg1)"
-      "$line_break$character"
-    ];
-    palette = "gruvbox_dark";
-    palettes.gruvbox_dark = {
-      color_fg0 = "#fbf1c7";
-      color_bg1 = "#3c3836";
-      color_bg3 = "#665c54";
-      color_blue = "#458588";
-      color_aqua = "#689d6a";
-      color_green = "#98971a";
-      color_orange = "#d65d0e";
-      color_purple = "#b16286";
-      color_red = "#cc241d";
-      color_yellow = "#d79921";
+        username = {
+            show_always = true;
+            style_user = "bg:color_orange fg:color_fg0";
+            style_root = "bg:color_orange fg:color_fg0";
+            format = "[ $user ]($style)";
+        };
+
+        directory = {
+            style = "fg:color_fg0 bg:color_yellow";
+            format = "[ $path ]($style)";
+            truncation_length = 3;
+            truncation_symbol = "…/";
+        };
+
+        directory.substitutions = {
+            "Documents" = "󰈙 ";
+            "Downloads" = " ";
+            "Music" = "󰝚 ";
+            "Pictures" = " ";
+            "Developer" = "󰲋 ";
+        };
+
+        git_branch = {
+            symbol = "";
+            style = "bg:color_aqua";
+            format = "[[ $symbol $branch ](fg:color_fg0 bg:color_aqua)]($style)";
+        };
+
+        git_status = {
+            style = "bg:color_aqua";
+            format = "[[($all_status$ahead_behind )](fg:color_fg0 bg:color_aqua)]($style)";
+        };
+
+        nodejs = {
+            symbol = "";
+            style = "bg:color_blue";
+            format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)";
+        };
+
+        c = {
+            symbol = " ";
+            style = "bg:color_blue";
+            format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)";
+        };
+
+        rust = {
+            symbol = "";
+            style = "bg:color_blue";
+            format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)";
+        };
+
+        golang = {
+            symbol = "";
+            style = "bg:color_blue";
+            format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)";
+        };
+
+        php = {
+            symbol = "";
+            style = "bg:color_blue";
+            format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)";
+        };
+
+        java = {
+            symbol = "";
+            style = "bg:color_blue";
+            format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)";
+        };
+
+        kotlin = {
+            symbol = "";
+            style = "bg:color_blue";
+            format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)";
+        };
+
+        haskell = {
+            symbol = "";
+            style = "bg:color_blue";
+            format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)";
+        };
+
+        python = {
+            symbol = "";
+            style = "bg:color_blue";
+            format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)";
+        };
+
+        docker_context = {
+            symbol = "";
+            style = "bg:color_bg3";
+            format = "[[ $symbol( $context) ](fg:#83a598 bg:color_bg3)]($style)";
+        };
+
+        conda = {
+            style = "bg:color_bg3";
+            format = "[[ $symbol( $environment) ](fg:#83a598 bg:color_bg3)]($style)";
+        };
+
+        time = {
+            disabled = false;
+            time_format = "%R";
+            style = "bg:color_bg1";
+            format = "[[  $time ](fg:color_fg0 bg:color_bg1)]($style)";
+        };
+
+        line_break = {
+            disabled = false;
+        };
+
+        character = {
+            disabled = false;
+            success_symbol = "[](bold fg:color_green)";
+            error_symbol = "[](bold fg:color_red)";
+            vimcmd_symbol = "[](bold fg:color_green)";
+            vimcmd_replace_one_symbol = "[](bold fg:color_purple)";
+            vimcmd_replace_symbol = "[](bold fg:color_purple)";
+            vimcmd_visual_symbol = "[](bold fg:color_yellow)";
+        };
     };
-
-    os = {
-      disabled = false;
-      style = "bg:color_orange fg:color_fg0";
-    };
-
-    os.symbols = {
-      Windows = "󰍲";
-      Ubuntu = "󰕈";
-      SUSE = "";
-      Raspbian = "󰐿";
-      Mint = "󰣭";
-      Macos = "󰀵";
-      Manjaro = "";
-      Linux = "󰌽";
-      Gentoo = "󰣨";
-      Fedora = "󰣛";
-      Alpine = "";
-      Amazon = "";
-      Android = "";
-      Arch = "󰣇";
-      Artix = "󰣇";
-      EndeavourOS = "";
-      CentOS = "";
-      Debian = "󰣚";
-      Redhat = "󱄛";
-      RedHatEnterprise = "󱄛";
-      Pop = "";
-    };
-
-    username = {
-      show_always = true;
-      style_user = "bg:color_orange fg:color_fg0";
-      style_root = "bg:color_orange fg:color_fg0";
-      format = "[ $user ]($style)";
-    };
-
-    directory = {
-      style = "fg:color_fg0 bg:color_yellow";
-      format = "[ $path ]($style)";
-      truncation_length = 3;
-      truncation_symbol = "…/";
-    };
-
-    directory.substitutions = {
-      "Documents" = "󰈙 ";
-      "Downloads" = " ";
-      "Music" = "󰝚 ";
-      "Pictures" = " ";
-      "Developer" = "󰲋 ";
-    };
-
-    git_branch = {
-      symbol = "";
-      style = "bg:color_aqua";
-      format = "[[ $symbol $branch ](fg:color_fg0 bg:color_aqua)]($style)";
-    };
-
-    git_status = {
-      style = "bg:color_aqua";
-      format = "[[($all_status$ahead_behind )](fg:color_fg0 bg:color_aqua)]($style)";
-    };
-
-    nodejs = {
-      symbol = "";
-      style = "bg:color_blue";
-      format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)";
-    };
-
-    c = {
-      symbol = " ";
-      style = "bg:color_blue";
-      format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)";
-    };
-
-    rust = {
-      symbol = "";
-      style = "bg:color_blue";
-      format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)";
-    };
-
-    golang = {
-      symbol = "";
-      style = "bg:color_blue";
-      format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)";
-    };
-
-    php = {
-      symbol = "";
-      style = "bg:color_blue";
-      format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)";
-    };
-
-    java = {
-      symbol = "";
-      style = "bg:color_blue";
-      format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)";
-    };
-
-    kotlin = {
-      symbol = "";
-      style = "bg:color_blue";
-      format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)";
-    };
-
-    haskell = {
-      symbol = "";
-      style = "bg:color_blue";
-      format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)";
-    };
-
-    python = {
-      symbol = "";
-      style = "bg:color_blue";
-      format = "[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)";
-    };
-
-    docker_context = {
-      symbol = "";
-      style = "bg:color_bg3";
-      format = "[[ $symbol( $context) ](fg:#83a598 bg:color_bg3)]($style)";
-    };
-
-    conda = {
-      style = "bg:color_bg3";
-      format = "[[ $symbol( $environment) ](fg:#83a598 bg:color_bg3)]($style)";
-    };
-
-    time = {
-      disabled = false;
-      time_format = "%R";
-      style = "bg:color_bg1";
-      format = "[[  $time ](fg:color_fg0 bg:color_bg1)]($style)";
-    };
-
-    line_break = {
-      disabled = false;
-    };
-
-    character = {
-      disabled = false;
-      success_symbol = "[](bold fg:color_green)";
-      error_symbol = "[](bold fg:color_red)";
-      vimcmd_symbol = "[](bold fg:color_green)";
-      vimcmd_replace_one_symbol = "[](bold fg:color_purple)";
-      vimcmd_replace_symbol = "[](bold fg:color_purple)";
-      vimcmd_visual_symbol = "[](bold fg:color_yellow)";
-    };
-  };
 }
