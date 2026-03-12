@@ -43,7 +43,9 @@ nix-channel --update
 
 #### Collecting garbage
 ```bash
-nix-collect-garbage -d
+nix-collect-garbage -d # On home manager
+sudo -i nix-collect-garbage -d # On home manager (some extra stuff)
+sudo nix-coollect-garbage -d # On nixos
 ```
 
 
