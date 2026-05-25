@@ -24,7 +24,6 @@
         fzf
         go
         commitizen
-        k3d
         gh
         devenv
         plocate

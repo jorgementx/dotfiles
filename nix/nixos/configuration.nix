@@ -29,6 +29,15 @@
   users.users.jorge.extraGroups = [ "docker" ];
   users.users.jorge.shell = pkgs.zsh;
 
+  services.k3s = {
+    enable = true;
+    role = "server";
+    extraFlags = toString [
+      "--write-kubeconfig-mode=0644"
+    ];
+  };
+  environment.variables.KUBECONFIG = "/etc/rancher/k3s/k3s.yaml";
+
   programs.nix-ld = {
     enable = true;
   };
