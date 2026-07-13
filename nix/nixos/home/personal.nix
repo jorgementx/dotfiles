@@ -23,7 +23,7 @@
         uv
         fzf
         go
-        commitizen
+        # commitizen
         gh
         devenv
         plocate
