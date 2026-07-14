@@ -16,17 +16,20 @@
     nixvim.url = "github:dc-tec/nixvim";
   };
 
-  outputs = {
-    nixpkgs,
-    nixpkgs-stable,
-    nixos-wsl,
-    home-manager,
-    nixvim,
-    ... 
-  }: let
+  outputs =
+    {
+      nixpkgs,
+      nixpkgs-stable,
+      nixos-wsl,
+      home-manager,
+      nixvim,
+      ...
+    }:
+    let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-    in {
+    in
+    {
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
         inherit system;
 
@@ -35,12 +38,12 @@
 
           nixos-wsl.nixosModules.wsl
 
-          home-manager.nixosModules.home-manager  # Home manager configuration as NixOS module
+          home-manager.nixosModules.home-manager # Home manager configuration as NixOS module
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
 
-            home-manager.users.jorge = import ./home/personal.nix;
+            home-manager.users.jorge = import ./home/lantek.nix;
             home-manager.extraSpecialArgs = {
               inherit nixvim;
               pkgs-stable = import nixpkgs-stable {
@@ -51,7 +54,8 @@
           }
         ];
       };
-      homeConfigurations = {  # Standalone home manager configuration
+      homeConfigurations = {
+        # Standalone home manager configuration
         "jorge-pb@jorgepb-hp" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
 
@@ -77,8 +81,7 @@
               config.allowUnfree = true;
             };
           };
-      };
+        };
       };
     };
 }
-
