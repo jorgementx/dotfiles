@@ -64,11 +64,31 @@
   programs.git = {
     enable = true;
     settings = {
-      user.name = "jorgementx";
-      user.email = "j.mentxaka@lantek.com";
+      user.name = "MentxakaJo-ext-921fa0c3";
+      user.email = "Jorge.Mentxaka.external@trumpf.com";
       pull.rebase = false;
       init.defaultBranch = "main";
       submodule.recurse = true;
+    };
+    extraConfig = {
+      "credential \"https://trumpf.ghe.com\"" = {
+        helper = [
+          ""
+          "auth git-credential"
+        ];
+      };
+    };
+  };
+
+  programs.gh = {
+    enable = true;
+    gitCredentialHelper = {
+      enable = true;
+      hosts = [
+        "https://github.com"
+        "https://gist.github.com"
+        "https://trumpf.ghe.com"
+      ];
     };
   };
 

@@ -23,20 +23,25 @@
   wsl.startMenuLaunchers = true;
   wsl.wslConf.network.generateResolvConf = false;
 
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    rootless.enable = true;
+    rootless.setSocketVariable = false;
+  };
+  # users.users.jorge.extraGroups = [ "docker" ]; # I'm currently using a rootless setup for docker so this is not needed anymore
+
   virtualisation.podman.enable = false;
   programs.zsh.enable = true;
-  users.users.jorge.extraGroups = [ "docker" ];
   users.users.jorge.shell = pkgs.zsh;
 
-  services.k3s = {
-    enable = true;
-    role = "server";
-    extraFlags = toString [
-      "--write-kubeconfig-mode=0644"
-    ];
-  };
-  environment.variables.KUBECONFIG = "/etc/rancher/k3s/k3s.yaml";
+  # services.k3s = {
+  #   enable = true;
+  #   role = "server";
+  #   extraflags = tostring [
+  #     "--write-kubeconfig-mode=0644"
+  #   ];
+  # };
+  # environment.variables.kubeconfig = "/etc/rancher/k3s/k3s.yaml";
 
   programs.nix-ld = {
     enable = true;
@@ -56,6 +61,25 @@
     "1.1.1.1"
     "8.8.8.8"
   ];
+
+  # Limit the number of generations to keep
+  boot.loader.systemd-boot.configurationLimit = 10;
+  # boot.loader.grub.configurationLimit = 10;
+
+  # Perform garbage collection weekly to maintain low disk usage
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "-d";
+    # options = "--delete-older-than 7d";
+  };
+
+  # Optimize storage
+  # You can also manually optimize the store via:
+  #    nix-store --optimise
+  # Refer to the following link for more details:
+  # https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-auto-optimise-store
+  nix.settings.auto-optimise-store = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

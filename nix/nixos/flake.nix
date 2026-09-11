@@ -43,7 +43,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
 
-            home-manager.users.jorge = import ./home/lantek.nix;
+            home-manager.users.jorge = import ./home/trumpf.nix;
             home-manager.extraSpecialArgs = {
               inherit nixvim;
               pkgs-stable = import nixpkgs-stable {
