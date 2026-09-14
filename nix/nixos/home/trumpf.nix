@@ -66,9 +66,11 @@
     settings = {
       user.name = "MentxakaJo-ext-921fa0c3";
       user.email = "Jorge.Mentxaka.external@trumpf.com";
-      pull.rebase = false;
+      pull.rebase = true;
       init.defaultBranch = "main";
+      branch.main.rebase = false;
       submodule.recurse = true;
+      push.autoSetupRemote = true;
     };
     extraConfig = {
       "credential \"https://trumpf.ghe.com\"" = {
