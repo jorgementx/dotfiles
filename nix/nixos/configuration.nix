@@ -26,11 +26,16 @@
   virtualisation.docker = {
     enable = true;
     rootless.enable = true;
-    rootless.setSocketVariable = false;
+    rootless.setSocketVariable = true;
   };
   # users.users.jorge.extraGroups = [ "docker" ]; # I'm currently using a rootless setup for docker so this is not needed anymore
 
-  virtualisation.podman.enable = false;
+  # virtualisation.podman = {
+  #   enable = true;
+  #   dockercompat = true;
+  #   dockersocket.enable = true;
+  # };
+
   programs.zsh.enable = true;
   users.users.jorge.shell = pkgs.zsh;
 
@@ -45,6 +50,32 @@
 
   programs.nix-ld = {
     enable = true;
+    libraries = with pkgs; [
+      nspr
+      nss
+      glib
+      dbus
+      expat
+      cups
+      alsa-lib
+      atk
+      at-spi2-atk
+      at-spi2-core
+      libdrm
+      libgbm
+      mesa
+      libxkbcommon
+      pango
+      cairo
+      udev
+      xorg.libX11
+      xorg.libXcomposite
+      xorg.libXdamage
+      xorg.libXext
+      xorg.libXfixes
+      xorg.libXrandr
+      xorg.libxcb
+    ];
   };
 
   environment.variables = {
