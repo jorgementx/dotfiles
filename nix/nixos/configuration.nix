@@ -24,7 +24,7 @@
   wsl.wslConf.network.generateResolvConf = false;
 
   virtualisation.docker = {
-    enable = true;
+    enable = false;
     rootless.enable = true;
     rootless.setSocketVariable = true;
   };
